@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact</title>
+  <link rel="stylesheet" href="contact.css" />
+  <script src="https://cdn.emailjs.com/dist/email.min.js" defer></script>
+  <script src="contact.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <img src="./imagenes/logo1.png" alt="" class="logo1" />
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about-us">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <button id="colorToggleBtn">Color Change</button>
+      </ul>
+      <i class="fas fa-bars menu-icon" id="menu-icon" onclick="toggleMenu()"></i>
+    </nav>
+
+    <section id="contact">
+      <h1>Contact Us</h1>
+      <form id="contact-form" novalidate autocomplete="off">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="subject">Subject (min. 5 chars):</label>
+        <input type="text" id="subject" name="subject" minlength="5" required />
+
+        <label for="message">Message (min. 20 chars):</label>
+        <textarea id="message" name="message" rows="6" minlength="20" required></textarea>
+
+        <button type="submit" id="send-btn">
+          <span class="btn-text">Send</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p id="response-msg" role="alert"></p>
+    </section>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const navList = document.querySelector(".nav-list");
+      const menuIcon = document.getElementById("menu-icon");
+
+      navList.classList.toggle("active");
+
+      if (navList.classList.contains("active")) {
+        menuIcon.classList.remove("fa-bars");
+        menuIcon.classList.add("fa-times");
+      } else {
+        menuIcon.classList.remove("fa-times");
+        menuIcon.classList.add("fa-bars");
+      }
+    }
+
+    document.querySelectorAll('.nav-list a').forEach(link => {
+      link.addEventListener('click', () => {
+        const navList = document.querySelector(".nav-list");
+        const menuIcon = document.getElementById("menu-icon");
+
+        if (navList.classList.contains("active")) {
+          navList.classList.remove("active");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
+        }
+      });
+    });
+
+  </script>
+
+  <script>
+    const totalColors = 7;
+    let currentColor = 0;
+  
+    const btn = document.getElementById('colorToggleBtn');
+  
+    function applyColor() {
+      document.body.className = '';
+      document.body.classList.add(`color-${currentColor}`);
+    }
+  
+    btn.addEventListener('click', () => {
+      currentColor = (currentColor + 1) % totalColors;
+      applyColor();
+    });
+  
+  
+    applyColor();
+  </script>
+
+</body>
+</html>
